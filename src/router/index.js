@@ -21,9 +21,10 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  /*history router, 使用默认hash router 注释mode*/
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
-
+console.log(process.env)
 export default router
