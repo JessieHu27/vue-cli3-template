@@ -76,24 +76,26 @@ module.exports = {
 
 
 	},
-	// configureWebpack: {
-	// 	optimization:{
-	// 		minimizer: [
-	// 			new UglifyJsWebpackPlugin({
-	// 				sourceMap:false,
-	// 				uglifyOptions: {
-	// 					warnings: false,
-	// 					compress: {
-	// 						drop_console: true,//console
-	// 						drop_debugger: false,
-	// 						pure_funcs: ['console.log']//移除console
-	// 					},
-	// 				},
-	// 			})
-	// 		]
-	// 	},
-	// 	plugins
-	// }
+	/*
+	configureWebpack: {
+		optimization:{
+			minimizer: [
+				new UglifyJsWebpackPlugin({
+					sourceMap:false,
+					uglifyOptions: {
+						warnings: false,
+						compress: {
+							drop_console: true,//console
+							drop_debugger: false,
+							pure_funcs: ['console.log']//移除console
+						},
+					},
+				})
+			]
+		},
+		plugins
+	},
+	*/
 	configureWebpack: config => {
 		config.optimization.minimizer = [
 			new UglifyJsWebpackPlugin({

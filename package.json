@@ -1,6 +1,7 @@
 {
   "name": "vue-cli3-template",
   "version": "0.1.0",
+  "description": "A Vue Project",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
