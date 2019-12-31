@@ -50,6 +50,24 @@ module.exports = {
 			.set('@', resolve('src'))
 			.set('assets', resolve('src/assets'))
 			.set('utils', resolve('src/utils'))
+		config.module.rule("svg").uses.clear();
+		config.module
+			.rule("svg")
+			.test(/\.svg$/)
+			.include.add(path.join(__dirname, "src/icons")) //处理svg目录
+			.end()
+			.use("svg-sprite-loader")
+			.loader("svg-sprite-loader")
+			.options({
+				symbolId: "icon-[name]"
+			})
+			.end();
+		// 修改images loader 添加svg处理
+		config.module
+			.rule("images")
+			.test(/\.(png|jpe?g|gif|webp|svg)(\?.*)?$/)
+			.exclude.add(path.join(__dirname, "src/icons"))
+			.end();
 		if(isProd){
 			/*移除preload prefetch*/
 			config.plugins.delete('preload').delete('prefetch');
