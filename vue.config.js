@@ -5,6 +5,7 @@ const UglifyJsWebpackPlugin = require("uglifyjs-webpack-plugin");
 const {DllReferencePlugin} = require('webpack')
 const AddAssetHtmlWebpackPlugin = require("add-asset-html-webpack-plugin"); // 给 index.html 注入 dll 生成的链接库
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+//const StylelintPlugin = require('stylelint-webpack-plugin')
 const fs = require('fs')
 const path = require('path')
 const resolve = dir => path.resolve(__dirname, dir)
@@ -14,26 +15,30 @@ const isProd = process.env.NODE_ENV === 'production'
 /*根据环境配置不同的plugin*/
 const plugins = [ new CleanWebpackPlugin() ];
 
-if(isProd && fs.existsSync(DLL_DIR)){
-	fs.readdirSync(DLL_DIR).forEach(file => {
-		if (/.*\.dll\.js$/.test(file)) {
-			plugins.push(
-				new AddAssetHtmlWebpackPlugin({
-					filepath: path.join( DLL_DIR, file),
-					outputPath: "js", // 输出路径，相对于默认的输出路径（dist）
-					publicPath: "js" // 引入文件路径
-				})
-			);
-		}
-		if (/.*\.manifest.json/.test(file)) {
-			plugins.push(
-				new DllReferencePlugin({
-					manifest: path.join(DLL_DIR, file)
-				})
-			);
-		}
-	});
+if(isProd){
+	/*添加dll依赖*/
+	if (fs.existsSync(DLL_DIR)) {
+		fs.readdirSync(DLL_DIR).forEach(file => {
+			if (/.*\.dll\.js$/.test(file)) {
+				plugins.push(
+					new AddAssetHtmlWebpackPlugin({
+						filepath: path.join( DLL_DIR, file),
+						outputPath: "js", // 输出路径，相对于默认的输出路径（dist）
+						publicPath: "js" // 引入文件路径
+					})
+				);
+			}
+			if (/.*\.manifest.json/.test(file)) {
+				plugins.push(
+					new DllReferencePlugin({
+						manifest: path.join(DLL_DIR, file)
+					})
+				);
+			}
+		});
+	}
 }
+
 
 module.exports = {
 	/*history router, hash router 设置为'./'*/
