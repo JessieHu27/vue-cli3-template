@@ -1,29 +1,11 @@
-# history-router
+# vue-cli3-template
 
-## Project setup
-```
-npm install
-```
+A project template based on vue-cli3
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## features
++ Webpack 4.0(Code split and compress, console drop, dll reference, cdn, gzip...)
++ Auto import(Component, JS file)
++ SVG icons
+...
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
